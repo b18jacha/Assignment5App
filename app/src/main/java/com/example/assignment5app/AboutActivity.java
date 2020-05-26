@@ -14,6 +14,11 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         TextView myTextView = findViewById(R.id.aboutTextView);
 
+        String showTargetGroup = "Denna app lämpar sig för alla campingsugna svenskar denna sommar. " +
+                "Nu när coronan är som störst kan det vara skönt att veta vart i Sverige det är säkert att åka till!";
+
+        myTextView.setText(showTargetGroup);
+
         Button myButton = findViewById(R.id.closeAboutButton);
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override

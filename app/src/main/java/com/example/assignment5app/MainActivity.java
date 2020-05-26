@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -47,6 +48,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String targetGroup = "This is just a test text";
                 Snackbar.make(myListView, targetGroup, Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int x, long id) {
+                // Det item som klickats på skriver ut den förbestämda information funktionen info() håller
+                String showInfo = regionArrayList.get(x).info();
+                Snackbar.make(myListView, showInfo, Snackbar.LENGTH_LONG).show();
             }
         });
 

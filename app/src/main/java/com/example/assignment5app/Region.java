@@ -23,7 +23,7 @@ public class Region {
         str+=name;
         str+=" har för nuvarande ";
         str+=size;
-        str+=" covid19-smittade och risknivån här är: ";
+        str+=" covid-19 smittade och risknivån här är: ";
         str+=category;
         str+=".";
 

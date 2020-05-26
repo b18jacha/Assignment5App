@@ -26,13 +26,20 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    ArrayList<Region> regionArrayList;
+    ArrayAdapter<Region> regionArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        regionArrayList = new ArrayList<>();
+        regionArrayAdapter = new ArrayAdapter<>(this,R.layout.mytextview,R.id.myTextView,regionArrayList);
+
+
         final ListView myListView = findViewById(R.id.myListView);
+        myListView.setAdapter(regionArrayAdapter);
 
         Button myButton = findViewById(R.id.targetButton);
         myButton.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +96,26 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String json) {
+            try {
+                JSONArray myJSONArray = new JSONArray(json);
+                for (int i = 0; i < myJSONArray.length(); i++) {
+                    // JSON-objekt som Java
+                    JSONObject myJSONObject = myJSONArray.getJSONObject(i);
+
+                    // Hämtar ut beståndsdelarna
+                    String name = myJSONObject.getString("name");
+                    String category = myJSONObject.getString("category");
+                    int size = myJSONObject.getInt("size");
+
+                    // Skickar beståndsdelarna till konstruktorn
+                    Region newRegion = new Region(name, category, size);
+                    regionArrayList.add(newRegion);
+                }
+            } catch (JSONException e) {
+                Log.e("brom","E:"+e.getMessage());
+            }
             Log.d("TAG", json);
+            regionArrayAdapter.notifyDataSetChanged();
         }
     }
 
